@@ -1,0 +1,22 @@
+{
+  "name": "cartongesso",
+  "version": "0.0.0",
+  "authors": [
+    "Walter Barbagallo <turbometalskater@gmail.com>"
+  ],
+  "description": "calculate the price of cartongesso",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.0",
+    "jquery": "~2.1.1",
+    "angularjs": "~1.3.1"
+  }
+}
