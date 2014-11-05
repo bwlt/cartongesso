@@ -422,11 +422,11 @@
           area * inputs.stcprice
         );
 
-        console.log("ptotmontanti:"+ptotmontanti,
-            "ptotguide:"+ptotguide,
-            "ptotlastra:"+ptotlastra,
-            "ptotviti:"+ptotviti,
-            "ptotstucco:"+ptotstucco);
+        // console.log("ptotmontanti:"+ptotmontanti,
+        //     "ptotguide:"+ptotguide,
+        //     "ptotlastra:"+ptotlastra,
+        //     "ptotviti:"+ptotviti,
+        //     "ptotstucco:"+ptotstucco);
 
         return ptotmontanti + ptotguide + ptotlastra + ptotviti + ptotstucco;
       }
@@ -466,7 +466,7 @@
         });
         // filter input number chars
         $('form').find('input[type=number]').on('keypress', function(e){
-          var ch = String.fromCharCode(e.keyCode);
+          var ch = String.fromCharCode(e.which);
           if (!/\d|\./.test(ch)) {
             e.preventDefault();
           }
