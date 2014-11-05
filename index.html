@@ -415,21 +415,25 @@
         return ptotmontanti + ptotguide + ptotlastra + ptotviti + ptotstucco;
       }
 
+      function updateTotal(){
+        var inputs = getInputValues(),
+            parameters = normalize(inputs);
+
+        var total = calculateTotalPrice(parameters);
+        if (isNaN(total)) {
+          $('#total').closest('.panel-footer').find('.alert').show();
+        }
+        else {
+          $('#total').closest('.panel-footer').find('.alert').hide();
+          $('#total').html(total);
+        }
+      }
+
       $(document).ready(function(){
-        $('form').change(function(){
 
-          var inputs = getInputValues(),
-              parameters = normalize(inputs);
+        $('form').change(updateTotal);
+        $('form').find('input[type=number]').keyup(updateTotal);
 
-          var total = calculateTotalPrice(parameters);
-          if (isNaN(total)) {
-            $('#total').closest('.panel-footer').find('.alert').show();
-          }
-          else {
-            $('#total').closest('.panel-footer').find('.alert').hide();
-            $('#total').html(total);
-          }
-        });
       });
     </script>
   </body>
