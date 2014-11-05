@@ -174,7 +174,7 @@
 
           </div>
           <div class="panel-footer text-right">
-            <div class="alert alert-danger pull-right" role="alert">Attenzione: impostazioni mancanti</div>
+            <div class="alert alert-danger pull-right" role="alert" style="display: none">Attenzione: impostazioni mancanti</div>
             <p class="h3">Totale: <span id="total">0</span> &euro;</p>
           </div>
         </div>
@@ -382,7 +382,7 @@
 
         // total viti
         //////////////////////////////////////// MISSING
-        var ptotlviti = getCurrencyValue(
+        var ptotviti = getCurrencyValue(
           area * inputs.lprice
         );
 
@@ -390,6 +390,12 @@
         var ptotstucco = getCurrencyValue(
           area * inputs.stcprice
         );
+
+        console.log("ptotmontanti:"+ptotmontanti,
+            "ptotguide:"+ptotguide,
+            "ptotlastra:"+ptotlastra,
+            "ptotviti:"+ptotviti,
+            "ptotstucco:"+ptotstucco);
 
         return ptotmontanti + ptotguide + ptotlastra + ptotstucco;
       }
