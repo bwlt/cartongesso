@@ -32,7 +32,7 @@
 
     <div class="container">
 
-      <form class="form-horizontal" role="form">
+      <form class="form-horizontal" role="form" name="inputs">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3>Calcolo prezzo cartongesso</h3>
@@ -157,12 +157,12 @@
               <div class="col-sm-10">
                 <div class="input-group col-sm-4">
                   <span class="input-group-addon">base</span>
-                  <input type="number" class="form-control" placeholder="inserisci base">
+                  <input type="number" class="form-control" placeholder="inserisci base" name="base">
                   <span class="input-group-addon">metri</span>
                 </div>
                 <div class="input-group col-sm-4">
                   <span class="input-group-addon">altezza</span>
-                  <input type="number" class="form-control" placeholder="inserisci altezza">
+                  <input type="number" class="form-control" placeholder="inserisci altezza" name="altezza">
                   <span class="input-group-addon">metri</span>
                 </div>
               </div>
@@ -170,9 +170,9 @@
 
           </div>
           <div class="panel-footer text-right">
-            <p class="h3">Totale: <span>0</span> &euro;</p>
+            <p class="h3">Totale: <span id="total">0</span> &euro;</p>
           </div>
-        <div>
+        </div>
       </form>
     </div>
 
@@ -185,106 +185,108 @@
             <h4 class="modal-title" id="modalLabel">Impostazioni</h4>
           </div>
           <div class="modal-body">
+            <form name="settings">
 
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Montante</label>
-              <div class="col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">30</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m</span>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon">50</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m</span>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon">75</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m</span>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon">100</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m</span>
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Montante</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <span class="input-group-addon">30</span>
+                    <input type="number" name="m30price" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">50</span>
+                    <input type="number" name="m50price" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">75</span>
+                    <input type="number" name="m75price" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">100</span>
+                    <input type="number" name="m100price" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Guida</label>
-              <div class="col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">30</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m</span>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon">50</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m</span>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon">75</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m</span>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon">100</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m</span>
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Guida</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <span class="input-group-addon">30</span>
+                    <input type="number" name="g30price" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">50</span>
+                    <input type="number" name="g50price" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">75</span>
+                    <input type="number" name="g75price" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">100</span>
+                    <input type="number" name="g100price" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Lastra</label>
-              <div class="col-sm-8">
-                <div class="input-group">
-                  <span class="input-group-addon">cartongesso</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m&sup2;</span>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon">idrolastra</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m&sup2;</span>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon">ignilastra</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m&sup2;</span>
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Lastra</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <span class="input-group-addon">cartongesso</span>
+                    <input type="number" name="lcrtprice" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m&sup2;</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">idrolastra</span>
+                    <input type="number" name="lidrprice" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m&sup2;</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">ignilastra</span>
+                    <input type="number" name="lignprice" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m&sup2;</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Vite</label>
-              <div class="col-sm-8">
-                <div class="input-group">
-                  <span class="input-group-addon">prezzo</span>
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / cad</span>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon">interasse</span>
-                  <input type="number" class="form-control" placeholder="inserisci misura">
-                  <span class="input-group-addon">m</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Stucco</label>
-              <div class="col-sm-8">
-                <div class="input-group">
-                  <input type="number" class="form-control" placeholder="inserisci prezzo">
-                  <span class="input-group-addon">&euro; / m&sup2;</span>
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Vite</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <span class="input-group-addon">prezzo</span>
+                    <input type="number" name="vitprice" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / cad</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">interasse</span>
+                    <input type="number" name="interasse" class="form-control" placeholder="inserisci misura">
+                    <span class="input-group-addon">m</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
+              <div class="form-group">
+                <label class="col-sm-3 control-label text-right">Stucco</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <input type="number" name="stcprice" class="form-control" placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m&sup2;</span>
+                  </div>
+                </div>
+              </div>
+
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
@@ -295,5 +297,108 @@
 
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+
+      function getCurrencyValue(value) {
+        return Math.round(Number(value) * 100) / 100;
+      }
+
+      function getInputValues() {
+        return {
+          montante : inputs.montante.value,
+          guida    : inputs.guida.value,
+          lastra   : inputs.lastra.value,
+          npareti  : inputs.parete.value,
+          base     : Number(inputs.base.value),
+          altezza  : Number(inputs.altezza.value),
+
+          mprice : {
+            30  : getCurrencyValue(settings.m30price.value),
+            50  : getCurrencyValue(settings.m50price.value),
+            75  : getCurrencyValue(settings.m75price.value),
+            100 : getCurrencyValue(settings.m100price.value)
+          },
+
+          gprice : {
+            30  : getCurrencyValue(settings.g30price.value),
+            50  : getCurrencyValue(settings.g50price.value),
+            75  : getCurrencyValue(settings.g75price.value),
+            100 : getCurrencyValue(settings.g100price.value)
+          },
+
+          lprice : {
+            cartongesso : getCurrencyValue(settings.lcrtprice.value),
+            idrolastra  : getCurrencyValue(settings.lidrprice.value),
+            ignilastra  : getCurrencyValue(settings.lignprice.value)
+          },
+
+          vitprice  : getCurrencyValue(settings.vitprice.value),
+          interasse : Number(settings.interasse.value),
+
+          stcprice : getCurrencyValue(settings.stcprice.value)
+        }
+      }
+
+      function normalize(inputs) {
+        var npareti = inputs.npareti === '1+1' ? 2 :
+            inputs.npareti === '1+2' ? 3 :
+                inputs.npareti === '2+2' ? 4 : 0;
+        inputs.npareti = npareti;
+
+        var mprice = inputs.mprice[inputs.montante];
+        inputs.mprice = mprice;
+
+        var gprice = inputs.gprice[inputs.guida];
+        inputs.gprice = gprice;
+
+        var lprice = inputs.lprice[inputs.lastra];
+        inputs.lprice = lprice;
+
+        return inputs;
+      }
+
+      function calculateTotalPrice(inputs) {
+        var area = inputs.base * inputs.altezza;
+
+        // total montanti
+        var ptotmontanti = getCurrencyValue(
+          area * inputs.mprice / inputs.interasse
+        );
+
+        // total guide
+        var ptotguide = getCurrencyValue(
+          2 * (inputs.base + inputs.altezza) * inputs.gprice
+        );
+
+        // total lastra
+        var ptotlastra = getCurrencyValue(
+          area * inputs.lprice * inputs.npareti
+        );
+
+        // total viti
+        //////////////////////////////////////// MISSING
+        var ptotlviti = getCurrencyValue(
+          area * inputs.lprice
+        );
+
+        // total stucco
+        var ptotstucco = getCurrencyValue(
+          area * inputs.stcprice
+        );
+
+        return ptotmontanti + ptotguide + ptotlastra + ptotstucco;
+      }
+
+      $(document).ready(function(){
+        $('form').change(function(){
+
+          var inputs = getInputValues(),
+              parameters = normalize(inputs);
+
+          var total = calculateTotalPrice(parameters);
+          $('#total').html(total);
+        });
+      });
+    </script>
   </body>
 </html>
