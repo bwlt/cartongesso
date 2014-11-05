@@ -432,7 +432,15 @@
       $(document).ready(function(){
 
         $('form').change(updateTotal);
-        $('form').find('input[type=number]').keyup(updateTotal);
+        $('form').find('input[type=number]').on('keypress', function(e){
+          var ch = String.fromCharCode(e.keyCode);
+          if (/\d|\./.test(ch)) {
+            updateTotal();
+          }
+          else {
+            e.preventDefault();
+          }
+        });
 
       });
     </script>
