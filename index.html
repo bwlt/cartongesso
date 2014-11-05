@@ -323,6 +323,22 @@
         return Math.round(Number(value) * 100) / 100;
       }
 
+      function getFormsValues() {
+        return {
+          inputs: $(inputs).serializeArray(),
+          settings: $(settings).serializeArray()
+        }
+      }
+
+      function setFormsValues(forms) {
+        for (var i = 0, len = forms.inputs.length; i < len; i++) {
+          inputs[forms.inputs[i].name].value = forms.inputs[i].value;
+        }
+        for (var i = 0, len = forms.settings.length; i < len; i++) {
+          settings[forms.settings[i].name].value = forms.settings[i].value;
+        }
+      }
+
       function getInputValues() {
         return {
           montante : inputs.montante.value,
@@ -429,17 +445,37 @@
         }
       }
 
+      function loadLocalStorage(){
+        var forms;
+        if (forms = window.localStorage.getItem('forms')) {
+          setFormsValues(JSON.parse(forms));
+          return true;
+        }
+        return false;
+      }
+
       $(document).ready(function(){
 
-        $('form').change(updateTotal);
+        loadLocalStorage() && updateTotal();
+
+        // trigger radio changes
+        $('form').find(':radio').change(function(){
+          var forms = getFormsValues();
+          window.localStorage.setItem('forms', JSON.stringify(forms));
+          updateTotal();
+        });
+        // filter input number chars
         $('form').find('input[type=number]').on('keypress', function(e){
           var ch = String.fromCharCode(e.keyCode);
-          if (/\d|\./.test(ch)) {
-            updateTotal();
-          }
-          else {
+          if (!/\d|\./.test(ch)) {
             e.preventDefault();
           }
+        });
+        // trigger input number changes
+        $('form').find('input[type=number]').keyup(function(e){
+          var forms = getFormsValues();
+          window.localStorage.setItem('forms', JSON.stringify(forms));
+          updateTotal();
         });
 
       });
