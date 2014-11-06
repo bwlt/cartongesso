@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>cartongesso</title>
-    <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css?__inline=true">
     <style type="text/css">
       body {
         margin-top: 40px;
@@ -315,8 +315,8 @@
       </div>
     </div>
 
-    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./bower_components/jquery/dist/jquery.min.js?__inline=true"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js?__inline=true"></script>
     <script>
 
       function getCurrencyValue(value) {
@@ -456,7 +456,8 @@
 
       $(document).ready(function(){
 
-        loadLocalStorage() && updateTotal();
+        loadLocalStorage();
+        updateTotal();
 
         // trigger radio changes
         $('form').find(':radio').change(function(){
