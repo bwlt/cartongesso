@@ -1,0 +1,25 @@
+body {
+    margin-top: 40px;
+}
+.panel-heading {
+    line-height: 56px;
+}
+.panel-heading h3 {
+    display: inline-block;
+}
+.panel-heading .row > * {
+    margin: 0 10px;
+}
+.form-group {
+    padding: 15px 0;
+}
+.form-group > label:after {
+    content: ":";
+}
+.input-group {
+    padding: 5px 0;
+}
+.panel-footer .alert {
+    display: inline-block;
+    margin-left: 20px;
+}
