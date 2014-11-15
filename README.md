@@ -18,6 +18,8 @@ Also the calculation of the total price is entirely performed with pure javascri
 Getting started / building
 --------------------------
 
+You can see a builded version of this application at [this link](https://turbometalskater.github.io/cartongesso/).
+
 For start tweaking with this repo, once cloned just run
 
     $ npm install
