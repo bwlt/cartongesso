@@ -145,10 +145,17 @@ $(document).ready(function(){
     updateTotal();
   });
   // filter input number chars
-  $('form').find('input[type=number]').on('keypress', function(e){
-    var ch = String.fromCharCode(e.which);
-    if (!/\d|\./.test(ch)) {
-      e.preventDefault();
+  $('form').find('input[type=number]').keyup(function(e){
+    var form_group = $(this).closest('.form-group'),
+        valid = true;
+    form_group.find('input[type=number]').each(function(){
+      valid = valid && $(this)[0].validity.valid;
+    });
+    if (valid) {
+      form_group.removeClass('has-error');
+    }
+    else {
+      form_group.addClass('has-error');
     }
   });
   // trigger input number changes
