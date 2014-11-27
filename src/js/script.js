@@ -75,32 +75,39 @@ function normalize(inputs) {
 }
 
 function calculateTotalPrice(inputs) {
+  document.cartongesso = {};
   var area = inputs.base * inputs.altezza;
+  document.cartongesso.area = area;
 
   // total montanti
   var ptotmontanti = getCurrencyValue(
     area * inputs.mprice / inputs.interasse
   );
+  document.cartongesso.ptotmontanti = ptotmontanti;
 
   // total guide
   var ptotguide = getCurrencyValue(
     2 * (inputs.base + inputs.altezza) * inputs.gprice
   );
+  document.cartongesso.ptotguide = ptotguide;
 
   // total lastra
   var ptotlastra = getCurrencyValue(
     area * inputs.lprice * inputs.npareti
   );
+  document.cartongesso.ptotlastra = ptotlastra;
 
   // total viti
   var ptotviti = getCurrencyValue(
     (area * inputs.vitprice) / (inputs.interasse * inputs.vitdistance)
   );
+  document.cartongesso.ptotviti = ptotviti;
 
   // total stucco
   var ptotstucco = getCurrencyValue(
     2 * area * inputs.stcprice
   );
+  document.cartongesso.ptotstucco = ptotstucco;
 
   return getCurrencyValue((ptotmontanti + ptotguide + ptotlastra + ptotviti + ptotstucco)/area);
 }
@@ -129,6 +136,23 @@ function loadLocalStorage(){
 }
 
 $(document).ready(function(){
+
+  // init tooltip
+  $(function () {
+    $('#total').closest('[data-toggle="tooltip"]').tooltip({
+      html: true,
+      title: function() {
+        return '' +
+          'area: ' + document.cartongesso.area + ' m&sup2;' + '<br>' +
+          'montanti: ' + document.cartongesso.ptotmontanti + ' &euro;' + '<br>' +
+          'guide: ' + document.cartongesso.ptotguide + ' &euro;' + '<br>' +
+          'lastra: ' + document.cartongesso.ptotlastra + ' &euro;' + '<br>' +
+          'viti: ' + document.cartongesso.ptotviti + ' &euro;' + '<br>' +
+          'stucco: ' + document.cartongesso.ptotstucco + ' &euro;' + '<br>' +
+          '';
+      }
+    });
+  });
 
   loadLocalStorage();
   updateTotal();
