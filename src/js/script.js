@@ -6,14 +6,15 @@ function getFormsValues() {
   return {
     inputs: $(inputs).serializeArray(),
     settings: $(settings).serializeArray()
-  }
+  };
 }
 
 function setFormsValues(forms) {
-  for (var i = 0, len = forms.inputs.length; i < len; i++) {
+  var i, len;
+  for (i = 0, len = forms.inputs.length; i < len; i++) {
     inputs[forms.inputs[i].name].value = forms.inputs[i].value;
   }
-  for (var i = 0, len = forms.settings.length; i < len; i++) {
+  for (i = 0, len = forms.settings.length; i < len; i++) {
     settings[forms.settings[i].name].value = forms.settings[i].value;
   }
 }
@@ -52,7 +53,7 @@ function getInputValues() {
     interasse : Number(settings.interasse.value),
 
     stcprice : getCurrencyValue(settings.stcprice.value)
-  }
+  };
 }
 
 function normalize(inputs) {
@@ -119,8 +120,8 @@ function updateTotal(){
 }
 
 function loadLocalStorage(){
-  var forms;
-  if (forms = window.localStorage.getItem('forms')) {
+  var forms = window.localStorage.getItem('forms');
+  if (forms) {
     setFormsValues(JSON.parse(forms));
     return true;
   }

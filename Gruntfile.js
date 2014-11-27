@@ -23,13 +23,17 @@ module.exports = function(grunt) {
         src: [ 'src/index.html' ],
         dest: [ 'build/' ]
       }
+    },
+    jshint: {
+      all: ['Gruntfile.js', 'src/js/*.js']
     }
   });
 
   grunt.loadNpmTasks('grunt-inline');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
-  grunt.registerTask('default', ['inline', 'htmlmin']);
+  grunt.registerTask('default', ['jshint', 'inline', 'htmlmin']);
 
 };
