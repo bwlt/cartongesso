@@ -98,16 +98,10 @@ function calculateTotalPrice(inputs) {
 
   // total stucco
   var ptotstucco = getCurrencyValue(
-    area * inputs.stcprice
+    2 * area * inputs.stcprice
   );
 
-  // console.log("ptotmontanti:"+ptotmontanti,
-  //     "ptotguide:"+ptotguide,
-  //     "ptotlastra:"+ptotlastra,
-  //     "ptotviti:"+ptotviti,
-  //     "ptotstucco:"+ptotstucco);
-
-  return ptotmontanti + ptotguide + ptotlastra + ptotviti + ptotstucco;
+  return getCurrencyValue((ptotmontanti + ptotguide + ptotlastra + ptotviti + ptotstucco)/area);
 }
 
 function updateTotal(){
