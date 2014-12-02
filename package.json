@@ -9,10 +9,16 @@
     "grunt": "^0.4.5",
     "grunt-contrib-htmlmin": "^0.3.0",
     "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
     "grunt-inline": "^0.3.2",
     "http-server": "^0.7.2"
   },
   "scripts": {
+    "postinstall": "bower install",
+
+    "prestart": "npm install",
+    "start": "http-server -a localhost -p 8000 -c-1",
+
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "walter barbagallo <turbometalskater@gmail.com>",
