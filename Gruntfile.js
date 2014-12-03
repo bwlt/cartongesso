@@ -16,6 +16,26 @@ module.exports = function(grunt) {
       }
     },
 
+    jshint: {
+      all: ['Gruntfile.js', 'src/js/*.js', 'test/**/*.js']
+    },
+
+    watch: {
+      scripts: {
+        files: ['<%= jshint.all %>'],
+        tasks: ['jshint'],
+        options: {
+          livereload: true
+        }
+      },
+      documents: {
+        files: ['<%= inline.dist.src %>'],
+        options: {
+          livereload: true
+        }
+      }
+    },
+
     inline: {
       dist: {
         options:{
@@ -27,27 +47,21 @@ module.exports = function(grunt) {
       }
     },
 
-    jshint: {
-      all: ['Gruntfile.js', 'src/js/*.js']
-    },
+    karma: {
+      unit: {
+        configFile: 'test/karma.conf.js'
+      }
+    }
 
-    watch: {
-      scripts: {
-        files: ['<%= jshint.all %>'],
-        tasks: ['jshint'],
-        options: {
-          livereload: true
-        }
-      },
-    },
   });
 
-  grunt.loadNpmTasks('grunt-inline');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-inline');
+  grunt.loadNpmTasks('grunt-karma');
 
-  // Default task(s).
+  // Default task
   grunt.registerTask('default', ['jshint', 'inline', 'htmlmin']);
 
 };

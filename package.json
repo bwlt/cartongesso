@@ -11,15 +11,20 @@
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-inline": "^0.3.2",
-    "http-server": "^0.7.2"
+    "grunt-karma": "^0.9.0",
+    "http-server": "^0.7.2",
+    "jasmine-core": "^2.1.3",
+    "karma": "^0.12.28",
+    "karma-chrome-launcher": "^0.1.6",
+    "karma-jasmine": "^0.3.2"
   },
   "scripts": {
     "postinstall": "bower install",
-
     "prestart": "npm install",
     "start": "http-server -a localhost -p 8000 -c-1",
-
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "npm install",
+    "test": "node node_modules/karma/bin/karma start test/karma.conf.js",
+    "test-single-run": "node node_modules/karma/bin/karma start test/karma.conf.js  --single-run"
   },
   "author": "walter barbagallo <turbometalskater@gmail.com>",
   "license": "ISC"
