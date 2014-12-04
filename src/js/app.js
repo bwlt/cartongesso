@@ -1,9 +1,9 @@
 (function(){
 'use strict';
 
-var app = angular.module('cartongesso', [
-    'cartongessoControllers',
-    'cartongessoServices'
+angular.module('cartongesso', [
+  'cartongessoControllers',
+  'cartongessoServices'
 ]);
 
 
