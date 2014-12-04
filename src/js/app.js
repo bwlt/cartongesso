@@ -6,4 +6,5 @@ var app = angular.module('cartongesso', [
     'cartongessoServices'
 ]);
 
+
 })();

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html>
+<html data-ng-app="cartongesso">
+
   <head>
     <meta author="Walter Barbagallo < turbometalskater@gmail.com >">
     <meta charset="utf-8">
@@ -10,7 +11,8 @@
     <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css?__inline=true">
     <link rel="stylesheet" type="text/css" href="./css/style.css?__inline=true"></link>
   </head>
-  <body>
+
+  <body data-ng-controller="DataController as dataController">
 
     <div class="container">
 
@@ -28,125 +30,88 @@
           </div>
           <div class="panel-body">
 
+            <!-- montante -->
             <div class="form-group">
               <label class="col-sm-2 control-label">Montante</label>
               <div class="col-sm-10">
-                <div class="radio-inline">
+                <div class="radio-inline" data-ng-repeat="el in dataController.data.montante">
                   <label>
-                    <input type="radio" name="montante" value="30" checked>
-                    30
-                  </label>
-                </div>
-                <div class="radio-inline">
-                  <label>
-                    <input type="radio" name="montante" value="50">
-                    50
-                  </label>
-                </div>
-                <div class="radio-inline">
-                  <label>
-                    <input type="radio" name="montante" value="75">
-                    75
-                  </label>
-                </div>
-                <div class="radio-inline">
-                  <label>
-                    <input type="radio" name="montante" value="100">
-                    100
+                    <input type="radio"
+                           value="{{ el.value }}"
+                           data-ng-model="dataController.$storage.montante">
+                    {{ el.label }}
                   </label>
                 </div>
               </div>
             </div>
 
+            <!-- guida -->
             <div class="form-group">
               <label class="col-sm-2 control-label">Guida</label>
               <div class="col-sm-10">
-                <div class="radio-inline">
+                <div class="radio-inline" data-ng-repeat="el in dataController.data.guida">
                   <label>
-                    <input type="radio" name="guida" value="30" checked>
-                    30
-                  </label>
-                </div>
-                <div class="radio-inline">
-                  <label>
-                    <input type="radio" name="guida" value="50">
-                    50
-                  </label>
-                </div>
-                <div class="radio-inline">
-                  <label>
-                    <input type="radio" name="guida" value="75">
-                    75
-                  </label>
-                </div>
-                <div class="radio-inline">
-                  <label>
-                    <input type="radio" name="guida" value="100">
-                    100
+                    <input type="radio"
+                           value="{{ el.value }}"
+                           data-ng-model="dataController.$storage.guida">
+                    {{ el.label }}
                   </label>
                 </div>
               </div>
             </div>
 
+            <!-- lastra -->
             <div class="form-group">
               <label class="col-sm-2 control-label">Lastra</label>
               <div class="col-sm-10">
-                <div class="radio-inline">
+                <div class="radio-inline" data-ng-repeat="el in dataController.data.lastra">
                   <label>
-                    <input type="radio" name="lastra" value="cartongesso" checked>
-                    Cartongesso
-                  </label>
-                </div>
-                <div class="radio-inline">
-                  <label>
-                    <input type="radio" name="lastra" value="idrolastra">
-                    Idrolastra
-                  </label>
-                </div>
-                <div class="radio-inline">
-                  <label>
-                    <input type="radio" name="lastra" value="ignilastra">
-                    Ignilastra
+                    <input type="radio"
+                           value="{{ el.value }}"
+                           data-ng-model="dataController.$storage.lastra">
+                    {{ el.label }}
                   </label>
                 </div>
               </div>
             </div>
 
+            <!-- parete -->
             <div class="form-group">
               <label class="col-sm-2 control-label">Parete</label>
               <div class="col-sm-10">
-                <div class="radio-inline">
+                <div class="radio-inline" data-ng-repeat="el in dataController.data.parete">
                   <label>
-                    <input type="radio" name="parete" value="1+1" checked>
-                    1+1
-                  </label>
-                </div>
-                <div class="radio-inline">
-                  <label>
-                    <input type="radio" name="parete" value="1+2">
-                    1+2
-                  </label>
-                </div>
-                <div class="radio-inline">
-                  <label>
-                    <input type="radio" name="parete" value="2+2">
-                    2+2
+                    <input type="radio"
+                           value="{{ el.value }}"
+                           data-ng-model="dataController.$storage.parete">
+                    {{ el.label }}
                   </label>
                 </div>
               </div>
             </div>
 
+            <!-- dimensioni -->
             <div class="form-group">
               <label class="col-sm-2 control-label">Dimensioni</label>
               <div class="col-sm-10">
                 <div class="input-group col-sm-4">
                   <span class="input-group-addon">base</span>
-                  <input type="number" min="0" step="any" class="form-control" placeholder="inserisci base" name="base">
+                  <input type="number"
+                         min="0"
+                         step="any"
+                         class="form-control"
+                         placeholder="inserisci base"
+                         data-ng-model="dataController.$storage.base">
                   <span class="input-group-addon">metri</span>
                 </div>
                 <div class="input-group col-sm-4">
                   <span class="input-group-addon">altezza</span>
-                  <input type="number" min="0" step="any" class="form-control" placeholder="inserisci altezza" name="altezza">
+                  <input type="number"
+                         min="0"
+                         step="any"
+                         class="form-control"
+                         placeholder="inserisci altezza"
+                         data-ng-model="dataController.$storage.altezza">
                   <span class="input-group-addon">metri</span>
                 </div>
               </div>
@@ -157,14 +122,14 @@
             <div class="alert alert-danger pull-right" role="alert" style="display: none">Attenzione: impostazioni mancanti</div>
             <p class="h3">
               <span data-toggle="tooltip" data-placement="top">Totale: <span id="total">0</span> &euro;/m&sup2;
-              <span>
+              </span>
             </p>
           </div>
         </div>
       </form>
     </div>
 
-    <!-- Modal -->
+    <!-- modal settings -->
     <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -175,110 +140,110 @@
           <div class="modal-body">
             <form name="settings">
 
+              <!-- montante setting -->
               <div class="form-group row">
                 <label class="col-sm-3 control-label text-right">Montante</label>
                 <div class="col-sm-7">
-                  <div class="input-group">
-                    <span class="input-group-addon">30</span>
-                    <input type="number" min="0" step=".01" name="m30price" class="form-control" placeholder="inserisci prezzo">
+                  <div class="input-group" data-ng-repeat="el in dataController.data.montanteSetting">
+                    <span class="input-group-addon">{{ el.label }}</span>
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.$storage[el.modelName]"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
                     <span class="input-group-addon">&euro; / m</span>
                   </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">50</span>
-                    <input type="number" min="0" step=".01" name="m50price" class="form-control" placeholder="inserisci prezzo">
-                    <span class="input-group-addon">&euro; / m</span>
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">75</span>
-                    <input type="number" min="0" step=".01" name="m75price" class="form-control" placeholder="inserisci prezzo">
-                    <span class="input-group-addon">&euro; / m</span>
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">100</span>
-                    <input type="number" min="0" step=".01" name="m100price" class="form-control" placeholder="inserisci prezzo">
-                    <span class="input-group-addon">&euro; / m</span>
-                  </div>
-                </div>
               </div>
 
+              <!-- guida setting -->
               <div class="form-group row">
                 <label class="col-sm-3 control-label text-right">Guida</label>
                 <div class="col-sm-7">
-                  <div class="input-group">
-                    <span class="input-group-addon">30</span>
-                    <input type="number" min="0" step=".01" name="g30price" class="form-control" placeholder="inserisci prezzo">
-                    <span class="input-group-addon">&euro; / m</span>
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">50</span>
-                    <input type="number" min="0" step=".01" name="g50price" class="form-control" placeholder="inserisci prezzo">
-                    <span class="input-group-addon">&euro; / m</span>
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">75</span>
-                    <input type="number" min="0" step=".01" name="g75price" class="form-control" placeholder="inserisci prezzo">
-                    <span class="input-group-addon">&euro; / m</span>
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">100</span>
-                    <input type="number" min="0" step=".01" name="g100price" class="form-control" placeholder="inserisci prezzo">
+                  <div class="input-group" data-ng-repeat="el in dataController.data.guidaSetting">
+                    <span class="input-group-addon">{{ el.label }}</span>
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.$storage[el.modelName]"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
                     <span class="input-group-addon">&euro; / m</span>
                   </div>
                 </div>
               </div>
 
+              <!-- lastra setting -->
               <div class="form-group row">
                 <label class="col-sm-3 control-label text-right">Lastra</label>
                 <div class="col-sm-7">
-                  <div class="input-group">
-                    <span class="input-group-addon">cartongesso</span>
-                    <input type="number" min="0" step=".01" name="lcrtprice" class="form-control" placeholder="inserisci prezzo">
-                    <span class="input-group-addon">&euro; / m&sup2;</span>
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">idrolastra</span>
-                    <input type="number" min="0" step=".01" name="lidrprice" class="form-control" placeholder="inserisci prezzo">
-                    <span class="input-group-addon">&euro; / m&sup2;</span>
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">ignilastra</span>
-                    <input type="number" min="0" step=".01" name="lignprice" class="form-control" placeholder="inserisci prezzo">
+                  <div class="input-group" data-ng-repeat="el in dataController.data.lastraSetting">
+                    <span class="input-group-addon">{{ el.label }}</span>
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.$storage[el.modelName]"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
                     <span class="input-group-addon">&euro; / m&sup2;</span>
                   </div>
                 </div>
               </div>
 
+              <!-- vite setting -->
               <div class="form-group row">
                 <label class="col-sm-3 control-label text-right">Vite</label>
                 <div class="col-sm-7">
                   <div class="input-group">
                     <span class="input-group-addon">prezzo</span>
-                    <input type="number" min="0" step=".01" name="vitprice" class="form-control" placeholder="inserisci prezzo">
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.$storage.vitprice"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
                     <span class="input-group-addon">&euro; / cad</span>
                   </div>
                   <div class="input-group">
                     <span class="input-group-addon">distanza</span>
-                    <input type="number" min="0" step="any" name="vitdistance" class="form-control" placeholder="inserisci misura">
+                    <input type="number"
+                           min="0"
+                           step="any"
+                           data-ng-model="dataController.$storage.vitdistance"
+                           class="form-control"
+                           placeholder="inserisci misura">
                     <span class="input-group-addon">m</span>
                   </div>
                 </div>
               </div>
 
+              <!-- stucco setting -->
               <div class="form-group row">
                 <label class="col-sm-3 control-label text-right">Stucco</label>
                 <div class="col-sm-7">
                   <div class="input-group">
-                    <input type="number" min="0" step=".01" name="stcprice" class="form-control" placeholder="inserisci prezzo">
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.$storage.stcprice"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
                     <span class="input-group-addon">&euro; / m&sup2;</span>
                   </div>
                 </div>
               </div>
 
+              <!-- interasse setting -->
               <div class="form-group row">
                 <label class="col-sm-3 control-label text-right">Interasse</label>
                 <div class="col-sm-7">
                   <div class="input-group">
-                    <input type="number" min="0" step="any" name="interasse" class="form-control" placeholder="inserisci misura">
+                    <input type="number"
+                           min="0"
+                           step="any"
+                           data-ng-model="dataController.$storage.interasse"
+                           class="form-control"
+                           placeholder="inserisci misura">
                     <span class="input-group-addon">m</span>
                   </div>
                 </div>
@@ -294,7 +259,11 @@
     </div>
 
     <script src="../bower_components/jquery/dist/jquery.min.js?__inline=true"></script>
+    <script src="../bower_components/angular/angular.min.js?__inline=true"></script>
+    <script src="../bower_components/ngstorage/ngStorage.min.js?__inline=true"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js?__inline=true"></script>
-    <script src="./js/script.js?__inline=true"></script>
+    <script src="./js/app.js?__inline=true"></script>
+    <script src="./js/controllers.js?__inline=true"></script>
+    <script src="./js/services.js?__inline=true"></script>
   </body>
 </html>
