@@ -8,17 +8,12 @@ angular.module('cartongessoServices', [])
  * This service contains the logic for adapting any number to a fixed precision
  * two decimal number.
  */
-.factory('currencyAdapter',
-  function(){
+.service('currencyAdapter', function(){
 
-  var getCurrencyValue = function(number) {
+  this.getCurrencyValue = function(number) {
     var numberObj = Number(number);
 
     return Number.isNaN(numberObj) ? 0 : Math.round(numberObj * 100) / 100;
-  };
-
-  return {
-    getCurrencyValue: getCurrencyValue
   };
 })
 
@@ -28,13 +23,13 @@ angular.module('cartongessoServices', [])
  * to the given area (i.e. [euro@m^2]).
  * Ask the mantainer for a detailed explatation of the calculations.
  */
-.factory('cartongessoCalculator', ['currencyAdapter', function(currencyAdapter){
+.service('cartongessoCalculator', ['currencyAdapter', function(currencyAdapter){
 
   /**
    * @param price float the montante price [euro@m]
    * @param interasse float distance between montanti [m]
    */
-  var calcMontanti = function(interasse, price) {
+  this.calcMontanti = function(interasse, price) {
     return interasse == '0' ? 0 :
       currencyAdapter.getCurrencyValue(price/interasse);
   };
@@ -44,7 +39,7 @@ angular.module('cartongessoServices', [])
    * @param h integer height [m]
    * @param price float the guide price [euro@m]
    */
-  var calcGuide = function(b, h, price) {
+  this.calcGuide = function(b, h, price) {
     if (b == '0' || h == '0') {
       return 0;
     }
@@ -56,7 +51,7 @@ angular.module('cartongessoServices', [])
    * @param num integer the number of lastre [dimesionless]
    * @param price float the lastre price [euro@m]
    */
-  var calcLastre = function(num, price) {
+  this.calcLastre = function(num, price) {
     return currencyAdapter.getCurrencyValue(
       num * price);
   };
@@ -66,7 +61,7 @@ angular.module('cartongessoServices', [])
    * @param d integer viti distance [m]
    * @param price float the single vite price [euro@vite]
    */
-  var calcViti = function(i, d, price) {
+  this.calcViti = function(i, d, price) {
     if (i == '0' || d == '0') {
       return 0;
     }
@@ -77,7 +72,7 @@ angular.module('cartongessoServices', [])
   /**
    * @param price float the stucco price [euro@m^2]
    */
-  var calcStucco = function(price) {
+  this.calcStucco = function(price) {
     return currencyAdapter.getCurrencyValue(
       2 * price);
   };
@@ -85,7 +80,7 @@ angular.module('cartongessoServices', [])
   /**
    * @param price float the lana di roccia price [euro@m^2]
    */
-  var calcRoccia = function(price) {
+  this.calcRoccia = function(price) {
     return currencyAdapter.getCurrencyValue(price);
   };
 
@@ -95,7 +90,7 @@ angular.module('cartongessoServices', [])
    * @param d integer distance between tasselli [m]
    * @param price float the guide price [euro@tassello]
    */
-  var calcTasselli = function(b, h, d, price) {
+  this.calcTasselli = function(b, h, d, price) {
     if (b == '0' || h == '0' || d == '0') {
       return 0;
     }
@@ -112,7 +107,7 @@ angular.module('cartongessoServices', [])
    * @param numLastre integer number of lastre [dimensionless]
    * ... various prices
    */
-  var calcTotale = function(b, h, i, dViti, dTasselli, numLastre,
+  this.calcTotale = function(b, h, i, dViti, dTasselli, numLastre,
     pMontante, pGuida, pLastra, pViti, pStucco, pRoccia, pTasselli){
 
     return calcMontanti(i, pMontante) +
@@ -123,17 +118,6 @@ angular.module('cartongessoServices', [])
       calcRoccia(pRoccia) +
       calcTasselli(b, h, dTasselli, pTasselli)
       ;
-  };
-
-  return {
-    calcMontanti: calcMontanti,
-    calcGuide: calcGuide,
-    calcLastre: calcLastre,
-    calcViti: calcViti,
-    calcStucco: calcStucco,
-    calcRoccia: calcRoccia,
-    calcTasselli: calcTasselli,
-    calcTotale: calcTotale
   };
 }]);
 
