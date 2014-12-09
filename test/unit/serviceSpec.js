@@ -162,4 +162,44 @@ describe('cartongessoCalculator service', function() {
 });
 
 
+describe('priceHelper service', function(){
+
+  beforeEach(function(){
+    module('cartongessoServices');
+  });
+
+
+  it('test getMontantePriceKey', inject(function(priceHelper){
+    expect(priceHelper.getMontantePriceKey(30)).toBe('m30price');
+    expect(priceHelper.getMontantePriceKey(50)).toBe('m50price');
+    expect(priceHelper.getMontantePriceKey(75)).toBe('m75price');
+    expect(priceHelper.getMontantePriceKey(100)).toBe('m100price');
+
+    expect(priceHelper.getMontantePriceKey('30')).toBe('m30price');
+    expect(priceHelper.getMontantePriceKey(0)).toBeUndefined();
+  }));
+
+
+  it('test getGuidaPriceKey', inject(function(priceHelper){
+    expect(priceHelper.getGuidaPriceKey(30)).toBe('g30price');
+    expect(priceHelper.getGuidaPriceKey(50)).toBe('g50price');
+    expect(priceHelper.getGuidaPriceKey(75)).toBe('g75price');
+    expect(priceHelper.getGuidaPriceKey(30)).toBe('g30price');
+
+    expect(priceHelper.getGuidaPriceKey('30')).toBe('g30price');
+    expect(priceHelper.getGuidaPriceKey(0)).toBeUndefined();
+  }));
+
+
+  it('test getLastraPriceKey', inject(function(priceHelper){
+    expect(priceHelper.getLastraPriceKey('cartongesso')).toBe('lcrtprice');
+    expect(priceHelper.getLastraPriceKey('idrolastra')).toBe('lidrprice');
+    expect(priceHelper.getLastraPriceKey('ignilastra')).toBe('lignprice');
+
+    expect(priceHelper.getLastraPriceKey('Cartongesso')).toBe('lcrtprice');
+  }));
+
+});
+
+
 })();

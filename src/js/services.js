@@ -1,12 +1,14 @@
 (function(){
 'use strict';
 
-angular.module('cartongessoServices', [])
+// TODO change services to factory
+angular.module('cartongessoServices', ['cartongessoData', 'underscorejs'])
 
 
 /**
  * This service contains the logic for adapting any number to a fixed precision
  * two decimal number.
+ * TODO: check if it can be substituted by ng currency filter
  */
 .service('currencyAdapter', function(){
 
@@ -110,15 +112,70 @@ angular.module('cartongessoServices', [])
   this.calcTotale = function(b, h, i, dViti, dTasselli, numLastre,
     pMontante, pGuida, pLastra, pViti, pStucco, pRoccia, pTasselli){
 
-    return calcMontanti(i, pMontante) +
-      calcGuide(b, h, pGuida) +
-      calcLastre(numLastre, pLastra) +
-      calcViti(i, dViti, pViti) +
-      calcStucco(pStucco) +
-      calcRoccia(pRoccia) +
-      calcTasselli(b, h, dTasselli, pTasselli)
-      ;
+    return currencyAdapter.getCurrencyValue(
+        this.calcMontanti(i, pMontante) +
+        this.calcGuide(b, h, pGuida) +
+        this.calcLastre(numLastre, pLastra) +
+        this.calcViti(i, dViti, pViti) +
+        this.calcStucco(pStucco) +
+        this.calcRoccia(pRoccia) +
+        this.calcTasselli(b, h, dTasselli, pTasselli)
+      );
   };
+}])
+
+
+/**
+ * This service contains the logic for adapting any number to a fixed precision
+ * two decimal number.
+ */
+.service('priceHelper', ['data', '_', function(data, _){
+
+  /**
+   * Given a montante label (or value), returns the associated key for accessing
+   * to his price in the data model
+   */
+  this.getMontantePriceKey = function(montanteType){
+    var priceKey = _.chain(data.montante)
+        .filter(function(el){
+          return el.value == montanteType;
+        })
+        .first()
+        .value();
+
+    return priceKey ? priceKey.price : undefined;
+  };
+
+  /**
+   * Given a guida label (or value), returns the associated key for accessing
+   * to his price in the data model
+   */
+  this.getGuidaPriceKey = function(guidaType){
+    var priceKey = _.chain(data.guida)
+        .filter(function(el){
+          return el.value == guidaType;
+        })
+        .first()
+        .value();
+
+    return priceKey ? priceKey.price : undefined;
+  };
+
+  /**
+   * Given a lastra label (or value), returns the associated key for accessing
+   * to his price in the data model
+   */
+  this.getLastraPriceKey = function(lastraType){
+    var priceKey = _.chain(data.lastra)
+        .filter(function(el){
+          return el.value == lastraType.toLowerCase();
+        })
+        .first()
+        .value();
+
+    return priceKey ? priceKey.price : undefined;
+  };
+
 }]);
 
 

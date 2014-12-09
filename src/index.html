@@ -38,7 +38,7 @@
                   <label>
                     <input type="radio"
                            value="{{ el.value }}"
-                           data-ng-model="dataController.$storage.montante">
+                           data-ng-model="dataController.storage.montante">
                     {{ el.label }}
                   </label>
                 </div>
@@ -53,7 +53,7 @@
                   <label>
                     <input type="radio"
                            value="{{ el.value }}"
-                           data-ng-model="dataController.$storage.guida">
+                           data-ng-model="dataController.storage.guida">
                     {{ el.label }}
                   </label>
                 </div>
@@ -68,7 +68,7 @@
                   <label>
                     <input type="radio"
                            value="{{ el.value }}"
-                           data-ng-model="dataController.$storage.lastra">
+                           data-ng-model="dataController.storage.lastra">
                     {{ el.label }}
                   </label>
                 </div>
@@ -83,9 +83,21 @@
                   <label>
                     <input type="radio"
                            value="{{ el.value }}"
-                           data-ng-model="dataController.$storage.parete">
+                           data-ng-model="dataController.storage.parete">
                     {{ el.label }}
                   </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- lana di roccia -->
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Lana di roccia</label>
+              <div class="col-sm-10">
+                <div class="checkbox-inline">
+                  <input type="checkbox"
+                         data-ng-model="dataController.storage.lanaroccia">
+                  Lana di roccia
                 </div>
               </div>
             </div>
@@ -101,7 +113,7 @@
                          step="any"
                          class="form-control"
                          placeholder="inserisci base"
-                         data-ng-model="dataController.$storage.base">
+                         data-ng-model="dataController.storage.base">
                   <span class="input-group-addon">metri</span>
                 </div>
                 <div class="input-group col-sm-4">
@@ -111,7 +123,7 @@
                          step="any"
                          class="form-control"
                          placeholder="inserisci altezza"
-                         data-ng-model="dataController.$storage.altezza">
+                         data-ng-model="dataController.storage.altezza">
                   <span class="input-group-addon">metri</span>
                 </div>
               </div>
@@ -121,7 +133,10 @@
           <div class="panel-footer text-right">
             <div class="alert alert-danger pull-right" role="alert" style="display: none">Attenzione: impostazioni mancanti</div>
             <p class="h3">
-              <span data-toggle="tooltip" data-placement="top">Totale: <span id="total">0</span> &euro;/m&sup2;
+              <span
+                data-toggle="tooltip"
+                data-placement="top">
+                Totale: <span id="total">{{ dataController.getTotal() }}</span> &euro;/m&sup2;
               </span>
             </p>
           </div>
@@ -149,7 +164,7 @@
                     <input type="number"
                            min="0"
                            step=".01"
-                           data-ng-model="dataController.$storage[el.modelName]"
+                           data-ng-model="dataController.storage[el.modelName]"
                            class="form-control"
                            placeholder="inserisci prezzo">
                     <span class="input-group-addon">&euro; / m</span>
@@ -165,7 +180,7 @@
                     <input type="number"
                            min="0"
                            step=".01"
-                           data-ng-model="dataController.$storage[el.modelName]"
+                           data-ng-model="dataController.storage[el.modelName]"
                            class="form-control"
                            placeholder="inserisci prezzo">
                     <span class="input-group-addon">&euro; / m</span>
@@ -182,7 +197,7 @@
                     <input type="number"
                            min="0"
                            step=".01"
-                           data-ng-model="dataController.$storage[el.modelName]"
+                           data-ng-model="dataController.storage[el.modelName]"
                            class="form-control"
                            placeholder="inserisci prezzo">
                     <span class="input-group-addon">&euro; / m&sup2;</span>
@@ -199,7 +214,7 @@
                     <input type="number"
                            min="0"
                            step=".01"
-                           data-ng-model="dataController.$storage.vitprice"
+                           data-ng-model="dataController.storage.vitprice"
                            class="form-control"
                            placeholder="inserisci prezzo">
                     <span class="input-group-addon">&euro; / cad</span>
@@ -209,7 +224,7 @@
                     <input type="number"
                            min="0"
                            step="any"
-                           data-ng-model="dataController.$storage.vitdistance"
+                           data-ng-model="dataController.storage.vitdistance"
                            class="form-control"
                            placeholder="inserisci misura">
                     <span class="input-group-addon">m</span>
@@ -225,7 +240,7 @@
                     <input type="number"
                            min="0"
                            step=".01"
-                           data-ng-model="dataController.$storage.stcprice"
+                           data-ng-model="dataController.storage.stcprice"
                            class="form-control"
                            placeholder="inserisci prezzo">
                     <span class="input-group-addon">&euro; / m&sup2;</span>
@@ -241,10 +256,54 @@
                     <input type="number"
                            min="0"
                            step="any"
-                           data-ng-model="dataController.$storage.interasse"
+                           data-ng-model="dataController.storage.interasse"
                            class="form-control"
                            placeholder="inserisci misura">
                     <span class="input-group-addon">m</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- tasselli setting -->
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Tasselli</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <span class="input-group-addon">prezzo</span>
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.storage.tasprice"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / cad</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">distanza</span>
+                    <input type="number"
+                           min="0"
+                           step="any"
+                           data-ng-model="dataController.storage.tasdistance"
+                           class="form-control"
+                           placeholder="inserisci misura">
+                    <span class="input-group-addon">m</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- lana di roccia setting -->
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Lana di roccia</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <span class="input-group-addon">prezzo</span>
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.storage.lrocprice"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / cad</span>
                   </div>
                 </div>
               </div>
@@ -259,11 +318,14 @@
     </div>
 
     <script src="../bower_components/jquery/dist/jquery.min.js?__inline=true"></script>
+    <script src="../bower_components/underscore/underscore-min.js?__inline=true"></script>
     <script src="../bower_components/angular/angular.min.js?__inline=true"></script>
     <script src="../bower_components/ngstorage/ngStorage.min.js?__inline=true"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js?__inline=true"></script>
     <script src="./js/app.js?__inline=true"></script>
+    <script src="./js/underscore.js?__inline=true"></script>
     <script src="./js/controllers.js?__inline=true"></script>
+    <script src="./js/data.js?__inline=true"></script>
     <script src="./js/services.js?__inline=true"></script>
   </body>
 </html>

@@ -4,38 +4,38 @@ describe('cartongesso application', function() {
     browser.get('index.html');
   });
 
-  describe('should have all ng-model attached to dataController.$storage var', function(){
+  describe('should have all ng-model attached to dataController.storage var', function(){
 
     describe('check the existence of model data in main screen form', function(){
-      it('check the existence of dataController.$storage.montante', function(){
+      it('check the existence of dataController.storage.montante', function(){
 
         expect(
-          element.all(by.model('dataController.$storage.montante'))
+          element.all(by.model('dataController.storage.montante'))
           .count()
         ).toBe(4);
 
         expect(
-          element.all(by.model('dataController.$storage.guida'))
+          element.all(by.model('dataController.storage.guida'))
           .count()
         ).toBe(4);
 
         expect(
-          element.all(by.model('dataController.$storage.lastra'))
+          element.all(by.model('dataController.storage.lastra'))
           .count()
         ).toBe(3);
 
         expect(
-          element.all(by.model('dataController.$storage.parete'))
+          element.all(by.model('dataController.storage.parete'))
           .count()
         ).toBe(4);
 
         expect(
-          element.all(by.model('dataController.$storage.base'))
+          element.all(by.model('dataController.storage.base'))
           .count()
         ).toBe(1);
 
         expect(
-          element.all(by.model('dataController.$storage.altezza'))
+          element.all(by.model('dataController.storage.altezza'))
           .count()
         ).toBe(1);
       });
@@ -50,43 +50,43 @@ describe('cartongesso application', function() {
 
         expect(
           element.all(by.repeater('el in dataController.data.montanteSetting'))
-          .all(by.model('dataController.$storage[el.modelName]'))
+          .all(by.model('dataController.storage[el.modelName]'))
           .count()
         ).toBe(4);
 
         expect(
           element.all(by.repeater('el in dataController.data.lastraSetting'))
-          .all(by.model('dataController.$storage[el.modelName]'))
+          .all(by.model('dataController.storage[el.modelName]'))
           .count()
         ).toBe(3);
 
         expect(
-          element.all(by.model('dataController.$storage.vitprice'))
+          element.all(by.model('dataController.storage.vitprice'))
           .count()
         ).toBe(1);
 
         expect(
-          element.all(by.model('dataController.$storage.vitdistance'))
+          element.all(by.model('dataController.storage.vitdistance'))
           .count()
         ).toBe(1);
 
         expect(
-          element.all(by.model('dataController.$storage.stcprice'))
+          element.all(by.model('dataController.storage.stcprice'))
           .count()
         ).toBe(1);
 
         expect(
-          element.all(by.model('dataController.$storage.interasse'))
+          element.all(by.model('dataController.storage.interasse'))
           .count()
         ).toBe(1);
 
         expect(
-          element.all(by.model('dataController.$storage.tasprice'))
+          element.all(by.model('dataController.storage.tasprice'))
           .count()
         ).toBe(1);
 
         expect(
-          element.all(by.model('dataController.$storage.tasdistance'))
+          element.all(by.model('dataController.storage.tasdistance'))
           .count()
         ).toBe(1);
 

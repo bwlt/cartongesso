@@ -1,165 +1,50 @@
 (function(){
 'use strict';
 
-angular.module('cartongessoControllers', ['ngStorage'])
+angular.module('cartongessoControllers', ['ngStorage', 'cartongessoData'])
 
 
 .controller('DataController',
-    ['$localStorage', 'cartongessoCalculator', 'data',
-    function($localStorage, cartongessoCalculator, data){
+    ['$localStorage', 'data', 'priceHelper', 'cartongessoCalculator',
+    function($localStorage, data, priceHelper, cartongessoCalculator){
+
+  // refer to 'this' as View Model (vm)
+  var vm = this;
 
   // provide the constant data
   this.data = data;
 
   // link the controller $storage var to HTML5 local storage
-  this.$storage = $localStorage.$default({
+  this.storage = $localStorage.$default({
     montante: 30,
     guida: 30,
     lastra: 'cartongesso',
     parete: 1
   });
-}])
 
 
-/* This is the best place found to embed this data, because it is only
- * needed by the DataController, and cannot be declared as an external json
- * file (remember that the builded project must stay in a single file)
- */
-.constant(
-  'data',
-  {
-    montante:
-    [
-      {
-        label: 30,
-        value: 30
-      },
-      {
-        label: 50,
-        value: 50
-      },
-      {
-        label: 75,
-        value: 75
-      },
-      {
-        label: 100,
-        value: 100
-      }
-    ],
+  // exports the calculation algorithm processed with correct parameters
+  this.getTotal = function() {
+    // define some vars
+    var b = vm.storage.base,
+        h = vm.storage.altezza,
+        i = vm.storage.interasse,
+        dViti = vm.storage.vitdistance,
+        dTasselli = vm.storage.tasdistance,
+        numLastre = vm.storage.parete,
+        pMontante = vm.storage[priceHelper.getMontantePriceKey(vm.storage.montante)],
+        pGuida = vm.storage[priceHelper.getGuidaPriceKey(vm.storage.guida)],
+        pLastra = vm.storage[priceHelper.getLastraPriceKey(vm.storage.lastra)],
+        pViti = vm.storage.vitprice,
+        pStucco = vm.storage.stcprice,
+        pRoccia = vm.storage.lanaroccia ? vm.storage.lrocprice : 0,
+        pTasselli = vm.storage.tasprice
+        ;
 
-    guida:
-    [
-      {
-        label: 30,
-        value: 30
-      },
-      {
-        label: 50,
-        value: 50
-      },
-      {
-        label: 75,
-        value: 75
-      },
-      {
-        label: 100,
-        value: 100
-      }
-    ],
+    return cartongessoCalculator.calcTotale(b, h, i, dViti, dTasselli,
+      numLastre, pMontante, pGuida, pLastra, pViti, pStucco, pRoccia, pTasselli);
+  };
 
-    lastra:
-    [
-      {
-        label: 'Cartongesso',
-        value: 'cartongesso'
-      },
-      {
-        label: 'Idrolastra',
-        value: 'idrolastra'
-      },
-      {
-        label: 'Ignilastra',
-        value: 'ignilastra'
-      }
-    ],
-
-    parete:
-    [
-      {
-        label: '1',
-        value: 1
-      },
-      {
-        label: '1+1',
-        value: 2
-      },
-      {
-        label: '1+2',
-        value: 3
-      },
-      {
-        label: '2+2',
-        value: 4
-      }
-    ],
-
-    montanteSetting:
-    [
-      {
-        label: '30',
-        modelName: 'm30price'
-      },
-      {
-        label: '50',
-        modelName: 'm50price'
-      },
-      {
-        label: '75',
-        modelName: 'm75price'
-      },
-      {
-        label: '100',
-        modelName: 'm100price'
-      }
-    ],
-
-    guidaSetting:
-    [
-      {
-        label: '30',
-        modelName: 'g30price'
-      },
-      {
-        label: '50',
-        modelName: 'g50price'
-      },
-      {
-        label: '75',
-        modelName: 'g75price'
-      },
-      {
-        label: '100',
-        modelName: 'g100price'
-      }
-    ],
-
-    lastraSetting:
-    [
-      {
-        label: 'cartongesso',
-        modelName: 'lcrtprice'
-      },
-      {
-        label: 'idrolastra',
-        modelName: 'lidrprice'
-      },
-      {
-        label: 'ignilastra',
-        modelName: 'lignprice'
-      }
-    ]
-  }
-);
+}]);
 
 })();
