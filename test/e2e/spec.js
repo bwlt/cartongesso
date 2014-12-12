@@ -94,4 +94,69 @@ describe('cartongesso application', function() {
     });
   });
 
+  xdescribe('check the calculation', function(){
+    // by the fact that the total is a sum, calculate partials one by one short
+    // circuiting the other terms (i.e. setting prices at zero)
+
+    beforeEach(function(){
+      // set prices to zero
+      element.all(by.buttonText('Impostazioni')).click();
+
+      element
+        .all(by.repeater('el in dataController.data.montanteSetting'))
+        .all(by.model('dataController.storage[el.modelName]')).clear().sendKeys('0');
+
+      element.all(by.buttonText('Chiudi')).click();
+
+      protractor.getInstance().sleep(1000); // sleep for the close animation
+    });
+
+
+    describe('check montante calculation', function(){
+
+      beforeEach(function(){
+        element.all(by.buttonText('Impostazioni')).click();
+
+        element
+          .all(by.repeater('el in dataController.data.montanteSetting'))
+          .each(function(el){
+            var repeater = el;
+            el.all(by.tagName('span')).first().getText().then(function(text){
+              var value;
+              if (text === '30') {
+                value = '1';
+              }
+              else if (text === '50') {
+                value = '2';
+              }
+              else if (text === '75') {
+                value = '3';
+              }
+              else if (text === '100') {
+                value = '4';
+              }
+              repeater
+                .element(by.model('dataController.storage[el.modelName]'))
+                .clear()
+                .sendKeys(value);
+            });
+          });
+
+        element.all(by.buttonText('Chiudi')).click();
+      });
+
+      it('calculate montante', function(){
+        element
+          .all(by.model('dataController.storage.montante'))
+          .filter(function(elem, index){
+            return elem.getAttribute('value').then(function(val){
+              return val === '50';
+            });
+          });
+      });
+
+    });
+
+  });
+
 });

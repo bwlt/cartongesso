@@ -20,7 +20,7 @@ angular.module('cartongessoControllers', ['ngStorage', 'cartongessoData'])
     guida: 30,
     lastra: 'cartongesso',
     parete: 1,
-    
+
     m30price: 1,
     m50price: 1.2,
     m75price: 1.3,
