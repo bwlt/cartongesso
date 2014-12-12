@@ -19,13 +19,32 @@ angular.module('cartongessoControllers', ['ngStorage', 'cartongessoData'])
     montante: 30,
     guida: 30,
     lastra: 'cartongesso',
-    parete: 1
+    parete: 1,
+    
+    m30price: 1,
+    m50price: 1.2,
+    m75price: 1.3,
+    m100price: 1.4,
+
+    g30price: 0.5,
+    g50price: 0.8,
+    g75price: 0.95,
+    g100price: 1.2,
+
+    lcrtprice: 2,
+    lidrprice: 3.5,
+    lignprice: 5.6,
+
+    vitprice: 0.08,
+    vitdistance: 0.3,
+    stcprice: 0.4,
+    interasse: 0.6
   });
 
 
   // exports the calculation algorithm processed with correct parameters
   this.getTotal = function() {
-    // define some vars
+    // fetch the vars
     var b = vm.storage.base,
         h = vm.storage.altezza,
         i = vm.storage.interasse,
