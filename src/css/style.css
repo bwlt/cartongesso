@@ -1,25 +1,40 @@
+/* Space out content a bit */
 body {
-    margin-top: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
-.panel-heading {
-    line-height: 56px;
+
+.container {
+  max-width: 768px;
 }
-.panel-heading h3 {
-    display: inline-block;
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.content,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
 }
-.panel-heading .row > * {
-    margin: 0 10px;
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
 }
+/* Make the masthead heading the same height as the navigation */
+.header .h2 {
+  padding-bottom: 19px;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+}
+
 .form-group {
-    padding: 15px 0;
+  margin: 30px auto;
 }
-.form-group > label:after {
-    content: ":";
-}
-.input-group {
-    padding: 5px 0;
-}
-.panel-footer .alert {
-    display: inline-block;
-    margin-left: 20px;
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
 }

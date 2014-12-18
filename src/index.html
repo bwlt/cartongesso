@@ -16,133 +16,140 @@
 
     <div class="container">
 
-      <form class="form-horizontal" role="form" name="inputs">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="row">
-              <h3>Calcolo prezzo cartongesso</h3>
-              <div class="pull-right">
-                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#settingsModal">
-                  Impostazioni
-                </button>
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li>
+              <a href="#"
+                data-toggle="modal"
+                data-target="#settingsModal">
+                Impostazioni
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <p class="text-muted h2">Cartongesso</p>
+      </div>
+
+      <div class="row content">
+        <form class="form-horizontal" role="form">
+
+          <!-- montante -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Montante</label>
+            <div class="col-sm-10">
+              <label class="radio-inline" data-ng-repeat="el in dataController.data.montante">
+                <input type="radio"
+                       value="{{ el.value }}"
+                       data-ng-model="dataController.storage.montante">
+                {{ el.label }}
+              </label>
+            </div>
+          </div>
+
+          <!-- guida -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Guida</label>
+            <div class="col-sm-10">
+              <label class="radio-inline" data-ng-repeat="el in dataController.data.guida">
+                <input type="radio"
+                       value="{{ el.value }}"
+                       data-ng-model="dataController.storage.guida">
+                {{ el.label }}
+              </label>
+            </div>
+          </div>
+
+          <!-- lastra -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Lastra</label>
+            <div class="col-sm-10">
+              <label class="radio-inline" data-ng-repeat="el in dataController.data.lastra">
+                <input type="radio"
+                       value="{{ el.value }}"
+                       data-ng-model="dataController.storage.lastra">
+                {{ el.label }}
+              </label>
+            </div>
+          </div>
+
+          <!-- parete -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Parete</label>
+            <div class="col-sm-10">
+              <label class="radio-inline" data-ng-repeat="el in dataController.data.parete">
+                <input type="radio"
+                       value="{{ el.value }}"
+                       data-ng-model="dataController.storage.parete">
+                {{ el.label }}
+              </label>
+            </div>
+          </div>
+
+          <!-- lana di roccia -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Lana di roccia</label>
+            <div class="col-sm-10">
+              <label class="checkbox-inline">
+                <input type="checkbox"
+                       data-ng-model="dataController.storage.lanaroccia">
+                Lana di roccia
+              </label>
+            </div>
+          </div>
+
+          <!-- base -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Base</label>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <input type="number"
+                       min="0"
+                       step="any"
+                       class="form-control"
+                       placeholder="inserisci base"
+                       data-ng-model="dataController.storage.base">
+                <span class="input-group-addon">metri</span>
               </div>
             </div>
           </div>
-          <div class="panel-body">
 
-            <!-- montante -->
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Montante</label>
-              <div class="col-sm-10">
-                <div class="radio-inline" data-ng-repeat="el in dataController.data.montante">
-                  <label>
-                    <input type="radio"
-                           value="{{ el.value }}"
-                           data-ng-model="dataController.storage.montante">
-                    {{ el.label }}
-                  </label>
-                </div>
+          <!-- altezza -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Altezza</label>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <input type="number"
+                       min="0"
+                       step="any"
+                       class="form-control"
+                       placeholder="inserisci altezza"
+                       data-ng-model="dataController.storage.altezza">
+                <span class="input-group-addon">metri</span>
               </div>
             </div>
-
-            <!-- guida -->
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Guida</label>
-              <div class="col-sm-10">
-                <div class="radio-inline" data-ng-repeat="el in dataController.data.guida">
-                  <label>
-                    <input type="radio"
-                           value="{{ el.value }}"
-                           data-ng-model="dataController.storage.guida">
-                    {{ el.label }}
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <!-- lastra -->
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Lastra</label>
-              <div class="col-sm-10">
-                <div class="radio-inline" data-ng-repeat="el in dataController.data.lastra">
-                  <label>
-                    <input type="radio"
-                           value="{{ el.value }}"
-                           data-ng-model="dataController.storage.lastra">
-                    {{ el.label }}
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <!-- parete -->
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Parete</label>
-              <div class="col-sm-10">
-                <div class="radio-inline" data-ng-repeat="el in dataController.data.parete">
-                  <label>
-                    <input type="radio"
-                           value="{{ el.value }}"
-                           data-ng-model="dataController.storage.parete">
-                    {{ el.label }}
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <!-- lana di roccia -->
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Lana di roccia</label>
-              <div class="col-sm-10">
-                <div class="checkbox-inline">
-                  <input type="checkbox"
-                         data-ng-model="dataController.storage.lanaroccia">
-                  Lana di roccia
-                </div>
-              </div>
-            </div>
-
-            <!-- dimensioni -->
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Dimensioni</label>
-              <div class="col-sm-10">
-                <div class="input-group col-sm-4">
-                  <span class="input-group-addon">base</span>
-                  <input type="number"
-                         min="0"
-                         step="any"
-                         class="form-control"
-                         placeholder="inserisci base"
-                         data-ng-model="dataController.storage.base">
-                  <span class="input-group-addon">metri</span>
-                </div>
-                <div class="input-group col-sm-4">
-                  <span class="input-group-addon">altezza</span>
-                  <input type="number"
-                         min="0"
-                         step="any"
-                         class="form-control"
-                         placeholder="inserisci altezza"
-                         data-ng-model="dataController.storage.altezza">
-                  <span class="input-group-addon">metri</span>
-                </div>
-              </div>
-            </div>
-
           </div>
-          <div class="panel-footer text-right">
-            <div class="alert alert-danger pull-right" role="alert" style="display: none">Attenzione: impostazioni mancanti</div>
-            <p class="h3">
-              <span
-                data-toggle="tooltip"
-                data-placement="top">
-                Totale: <span id="total">{{ dataController.getTotal() }}</span> &euro;/m&sup2;
-              </span>
-            </p>
-          </div>
+
+        </form>
+
+        <div class="text-center">
+          <p class="h2">
+            <span
+              data-toggle="tooltip"
+              data-placement="top">
+              Totale: <span id="total">{{ dataController.getTotal() }}</span> &euro;/m&sup2;
+            </span>
+          </p>
         </div>
-      </form>
-    </div>
+
+      </div><!-- end .row.content -->
+
+      <footer class="footer">
+        <p>&copy; Walter Barbagallo 2014</p>
+      </footer>
+
+    </div> <!-- /container -->
+
 
     <!-- modal settings -->
     <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

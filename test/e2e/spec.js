@@ -43,7 +43,7 @@ describe('cartongesso application', function() {
 
     describe('check the existence of model data in settings form', function(){
       it('check the existence', function(){
-        var settingBtn = element.all(by.buttonText('Impostazioni'));
+        var settingBtn = element.all(by.linkText('Impostazioni'));
         expect(settingBtn.count()).toBe(1);
 
         settingBtn.click();
