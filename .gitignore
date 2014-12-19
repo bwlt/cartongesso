@@ -1,5 +1,4 @@
-/bower_components/
-/node_modules/
-/dist/
-/build/
-*.sublime-*
+bower_components
+node_modules
+dist
+.tmp

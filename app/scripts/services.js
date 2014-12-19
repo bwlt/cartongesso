@@ -15,7 +15,7 @@ angular.module('cartongessoServices', ['cartongessoData', 'underscorejs'])
   this.getCurrencyValue = function(number) {
     var numberObj = Number(number);
 
-    return Number.isNaN(numberObj) ? 0 : Math.round(numberObj * 100) / 100;
+    return isNaN(numberObj) ? 0 : Math.round(numberObj * 100) / 100;
   };
 })
 

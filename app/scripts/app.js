@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-angular.module('cartongesso', [
+angular.module('cartongessoApp', [
   'cartongessoControllers',
   'cartongessoServices'
 ]);
