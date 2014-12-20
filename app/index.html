@@ -1,0 +1,368 @@
+<!doctype html>
+<!-- build:process -->
+<!--
+* cartongesso v<%= pkg.version %> (<%= pkg.homepage %>)
+* (c) 2014 Walter Barbagallo
+* Licensed under MIT
+-->
+ <!-- /build -->
+
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- build:css(./) ../.tmp/styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp/) ../.tmp/styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="cartongessoApp" data-ng-controller="DataController as dataController">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="container">
+
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li>
+              <a href="#"
+                data-toggle="modal"
+                data-target="#settingsModal">
+                Impostazioni
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <p class="text-muted h2">Cartongesso</p>
+      </div>
+
+      <div class="row content">
+        <form class="form-horizontal" role="form">
+
+          <!-- montante -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Montante</label>
+            <div class="col-sm-10">
+              <label class="radio-inline" data-ng-repeat="el in dataController.data.montante">
+                <input type="radio"
+                       value="{{ el.value }}"
+                       data-ng-model="dataController.storage.montante">
+                {{ el.label }}
+              </label>
+            </div>
+          </div>
+
+          <!-- guida -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Guida</label>
+            <div class="col-sm-10">
+              <label class="radio-inline" data-ng-repeat="el in dataController.data.guida">
+                <input type="radio"
+                       value="{{ el.value }}"
+                       data-ng-model="dataController.storage.guida">
+                {{ el.label }}
+              </label>
+            </div>
+          </div>
+
+          <!-- lastra -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Lastra</label>
+            <div class="col-sm-10">
+              <label class="radio-inline" data-ng-repeat="el in dataController.data.lastra">
+                <input type="radio"
+                       value="{{ el.value }}"
+                       data-ng-model="dataController.storage.lastra">
+                {{ el.label }}
+              </label>
+            </div>
+          </div>
+
+          <!-- parete -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Parete</label>
+            <div class="col-sm-10">
+              <label class="radio-inline" data-ng-repeat="el in dataController.data.parete">
+                <input type="radio"
+                       value="{{ el.value }}"
+                       data-ng-model="dataController.storage.parete">
+                {{ el.label }}
+              </label>
+            </div>
+          </div>
+
+          <!-- lana di roccia -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Lana di roccia</label>
+            <div class="col-sm-10">
+              <label class="checkbox-inline">
+                <input type="checkbox"
+                       data-ng-model="dataController.storage.lanaroccia">
+                Lana di roccia
+              </label>
+            </div>
+          </div>
+
+          <!-- base -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Base</label>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <input type="number"
+                       min="0"
+                       step="any"
+                       class="form-control"
+                       placeholder="inserisci base"
+                       data-ng-model="dataController.storage.base">
+                <span class="input-group-addon">metri</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- altezza -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Altezza</label>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <input type="number"
+                       min="0"
+                       step="any"
+                       class="form-control"
+                       placeholder="inserisci altezza"
+                       data-ng-model="dataController.storage.altezza">
+                <span class="input-group-addon">metri</span>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+        <div class="text-center">
+          <p class="h2">
+            <span
+              data-toggle="tooltip"
+              data-placement="top">
+              Totale: <span id="total">{{ dataController.getTotal() }}</span> &euro;/m&sup2;
+            </span>
+          </p>
+        </div>
+
+      </div><!-- end .row.content -->
+
+      <footer class="footer">
+        <p>&copy; Walter Barbagallo 2014</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <!-- modal settings -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="modalLabel">Impostazioni</h4>
+          </div>
+          <div class="modal-body">
+            <form name="settings">
+
+              <!-- montante setting -->
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Montante</label>
+                <div class="col-sm-7">
+                  <div class="input-group" data-ng-repeat="el in dataController.data.montanteSetting">
+                    <span class="input-group-addon">{{ el.label }}</span>
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.storage[el.modelName]"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- guida setting -->
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Guida</label>
+                <div class="col-sm-7">
+                  <div class="input-group" data-ng-repeat="el in dataController.data.guidaSetting">
+                    <span class="input-group-addon">{{ el.label }}</span>
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.storage[el.modelName]"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- lastra setting -->
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Lastra</label>
+                <div class="col-sm-7">
+                  <div class="input-group" data-ng-repeat="el in dataController.data.lastraSetting">
+                    <span class="input-group-addon">{{ el.label }}</span>
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.storage[el.modelName]"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m&sup2;</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- vite setting -->
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Vite</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <span class="input-group-addon">prezzo</span>
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.storage.vitprice"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / cad</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">distanza</span>
+                    <input type="number"
+                           min="0"
+                           step="any"
+                           data-ng-model="dataController.storage.vitdistance"
+                           class="form-control"
+                           placeholder="inserisci misura">
+                    <span class="input-group-addon">m</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- stucco setting -->
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Stucco</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.storage.stcprice"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m&sup2;</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- interasse setting -->
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Interasse</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <input type="number"
+                           min="0"
+                           step="any"
+                           data-ng-model="dataController.storage.interasse"
+                           class="form-control"
+                           placeholder="inserisci misura">
+                    <span class="input-group-addon">m</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- tasselli setting -->
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Tasselli</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <span class="input-group-addon">prezzo</span>
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.storage.tasprice"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / cad</span>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">distanza</span>
+                    <input type="number"
+                           min="0"
+                           step="any"
+                           data-ng-model="dataController.storage.tasdistance"
+                           class="form-control"
+                           placeholder="inserisci misura">
+                    <span class="input-group-addon">m</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- lana di roccia setting -->
+              <div class="form-group row">
+                <label class="col-sm-3 control-label text-right">Lana di roccia</label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <span class="input-group-addon">prezzo</span>
+                    <input type="number"
+                           min="0"
+                           step=".01"
+                           data-ng-model="dataController.storage.lrocprice"
+                           class="form-control"
+                           placeholder="inserisci prezzo">
+                    <span class="input-group-addon">&euro; / m&sup2;</span>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- build:js(.) ../.tmp/scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js(./) ../.tmp/scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js(app/) ../.tmp/scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/underscore.js"></script>
+    <script src="scripts/controllers.js"></script>
+    <script src="scripts/data.js"></script>
+    <script src="scripts/services.js"></script>
+    <!-- endbuild -->
+</body>
+</html>
