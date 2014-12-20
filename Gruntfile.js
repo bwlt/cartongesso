@@ -186,12 +186,12 @@ module.exports = function (grunt) {
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
       options: {
-        dest: '<%= yeoman.dist %>',
+        dest: '.tmp/',
         flow: {
           html: {
             steps: {
               js: ['concat', 'uglifyjs'],
-              css: ['cssmin']
+              css: ['concat', 'cssmin']
             },
             post: {}
           }
@@ -201,10 +201,17 @@ module.exports = function (grunt) {
 
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      html: ['<%= yeoman.dist %>/index.html'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
+        blockReplacements: {
+          // replace blocks with inline task compatibility
+          css: function (block) {
+              return '<link rel="stylesheet" href="' + block.dest + '?__inline=true">';
+          },
+          js: function (block) {
+              return '<script src="' + block.dest + '?__inline=true"></script>';
+          }
+    }
       }
     },
 
@@ -276,8 +283,7 @@ module.exports = function (grunt) {
 
     inline: {
       dist: {
-        src: [ '<%= yeoman.app %>/index.html' ],
-        dest: [ '<%= yeoman.dist %>' ]
+        src: '<%= yeoman.dist %>/index.html'
       }
     },
 
@@ -299,27 +305,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          dot: true,
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
-          src: [
-            '*.{ico,png,txt}',
-            '.htaccess',
-            '*.html',
-            'views/{,*/}*.html',
-            'images/{,*/}*.{webp}',
-            'fonts/{,*/}*.*'
-          ]
-        }, {
-          expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
-          src: ['generated/*']
-        }, {
-          expand: true,
-          cwd: 'bower_components/bootstrap/dist',
-          src: 'fonts/*',
-          dest: '<%= yeoman.dist %>'
+          src: 'index.html'
         }]
       },
       styles: {
@@ -337,11 +325,6 @@ module.exports = function (grunt) {
       ],
       test: [
         'copy:styles'
-      ],
-      dist: [
-        'copy:styles',
-        'imagemin',
-        'svgmin'
       ]
     },
 
@@ -387,16 +370,17 @@ module.exports = function (grunt) {
     'clean:dist',
     'wiredep',
     'useminPrepare',
-    'concurrent:dist',
+    'copy:styles',
     'autoprefixer',
     'concat',
     'ngAnnotate',
     'copy:dist',
     'cssmin',
     'uglify',
-    'filerev',
+    // 'filerev',
     'usemin',
-    'htmlmin'
+    'inline',
+    'htmlmin',
   ]);
 
   grunt.registerTask('default', [
