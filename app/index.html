@@ -1,11 +1,18 @@
 <!doctype html>
+<!-- build:process -->
+<!--
+* cartongesso v<%= pkg.version %> (<%= pkg.homepage %>)
+* (c) 2014 Walter Barbagallo
+* Licensed under MIT
+-->
+ <!-- /build -->
+
 <html class="no-js">
   <head>
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(./) ../.tmp/styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -350,12 +357,12 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js(app/) ../.tmp/scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/underscore.js"></script>
-        <script src="scripts/controllers.js"></script>
-        <script src="scripts/data.js"></script>
-        <script src="scripts/services.js"></script>
-        <!-- endbuild -->
+    <!-- build:js(app/) ../.tmp/scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/underscore.js"></script>
+    <script src="scripts/controllers.js"></script>
+    <script src="scripts/data.js"></script>
+    <script src="scripts/services.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

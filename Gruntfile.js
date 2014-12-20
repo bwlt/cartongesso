@@ -24,6 +24,8 @@ module.exports = function (grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
+    pkg: grunt.file.readJSON("package.json"),
+
     // Project settings
     yeoman: appConfig,
 
@@ -281,6 +283,13 @@ module.exports = function (grunt) {
       }
     },
 
+    htmlbuild: {
+      dist: {
+        src: '<%= yeoman.dist %>/index.html',
+        dest: '<%= yeoman.dist %>/index.html'
+      }
+    },
+
     inline: {
       dist: {
         src: '<%= yeoman.dist %>/index.html'
@@ -379,6 +388,7 @@ module.exports = function (grunt) {
     'uglify',
     // 'filerev',
     'usemin',
+    'htmlbuild',
     'inline',
     'htmlmin',
   ]);
